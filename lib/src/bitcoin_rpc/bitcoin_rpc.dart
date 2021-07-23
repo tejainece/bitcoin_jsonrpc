@@ -23,4 +23,34 @@ class BitcoinRPC {
     }
     return BigInt.parse(resp.result.toString());
   }
+
+  Future<String> getBlockVerbosity0(String blockHash) async {
+    final params = <dynamic>[blockHash, 0];
+    final resp = await jrpc.callRPC(
+      JRPCRequest(
+        id: jrpc.nextId,
+        method: 'getblock',
+        params: params,
+      ),
+    );
+    if (resp.error != null) {
+      throw resp.error!;
+    }
+    return resp.result as String;
+  }
+
+  Future<String> getBlockHash(BigInt blockNumber) async {
+    final params = <dynamic>[blockNumber.toInt()];
+    final resp = await jrpc.callRPC(
+      JRPCRequest(
+        id: jrpc.nextId,
+        method: 'getblockhash',
+        params: params,
+      ),
+    );
+    if (resp.error != null) {
+      throw resp.error!;
+    }
+    return resp.result as String;
+  }
 }
