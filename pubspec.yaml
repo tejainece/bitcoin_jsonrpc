@@ -9,6 +9,10 @@ environment:
 dependencies:
   http: ^0.13.3
   pedantic: ^1.11.1
+  crypto:
+  hash:
+    git: https://github.com/redDwarf03/hash
+  ninja: ^3.0.2
 
 dev_dependencies:
   test: ^1.17.10

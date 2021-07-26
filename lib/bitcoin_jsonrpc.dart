@@ -4,3 +4,4 @@
 library bitcoin_jsonrpc;
 
 export 'src/bitcoin_rpc/bitcoin_rpc.dart';
+export 'src/utils/hash160.dart';
