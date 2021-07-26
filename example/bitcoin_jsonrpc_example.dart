@@ -15,6 +15,8 @@ Future<void> main() async {
   print(latestBlock);
   final hash = await rpc.getBlockHash(latestBlock);
   print(hash);
-  final blockSer = await rpc.getBlockVerbosity0(hash);
-  print(blockSer);
+  /*final blockSer = await rpc.getBlockVerbosity0(hash);
+  print(blockSer);*/
+  await rpc.getBlockVerbosity1(hash);
+  await rpc.getBlockVerbosity2(hash);
 }
