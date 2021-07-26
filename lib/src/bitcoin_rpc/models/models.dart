@@ -42,6 +42,18 @@ class Block {
       required this.previousBlockHash,
       required this.nextBlockHash});
 
+  Transaction? findTxByTxId(String txId) {
+    if(transactions == null) {
+      throw Exception('does not have verbose transactions');
+    }
+    for(final tx in transactions!) {
+      if(tx.txId == txId) {
+        return tx;
+      }
+    }
+    return null;
+  }
+
   static Block fromMap(Map map) {
     List<String>? txStrings;
     List<Transaction>? txs;
@@ -189,13 +201,23 @@ class ScriptPubKey {
   final int? reqSigs;
   final String type;
   final List<String> addresses;
+  final Map originalBody;
   ScriptPubKey({
     required this.asm,
     required this.hex,
     required this.reqSigs,
     required this.type,
     required this.addresses,
+    required this.originalBody,
   });
+
+  Map<String, dynamic> toJson() => {
+        'asm': asm,
+        'hex': hex,
+        'reqSigs': reqSigs,
+        'type': type,
+        'addresses': addresses,
+      };
 
   static ScriptPubKey fromMap(Map map) {
     return ScriptPubKey(
@@ -204,6 +226,7 @@ class ScriptPubKey {
       reqSigs: map['reqSigs'],
       type: map['type'],
       addresses: ((map['addresses'] ?? []) as List).cast<String>(),
+      originalBody: map,
     );
   }
 }
