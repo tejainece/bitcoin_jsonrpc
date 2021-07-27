@@ -15,6 +15,7 @@ dependencies:
   ninja: ^3.0.2
   ninja_bip32:
     path: ../ninja_bip32
+  bs58check: ^1.0.2
 
 dev_dependencies:
   test: ^1.17.10
