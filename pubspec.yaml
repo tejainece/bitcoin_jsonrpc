@@ -13,6 +13,8 @@ dependencies:
   hash:
     git: https://github.com/redDwarf03/hash
   ninja: ^3.0.2
+  ninja_bip32:
+    path: ../ninja_bip32
 
 dev_dependencies:
   test: ^1.17.10
