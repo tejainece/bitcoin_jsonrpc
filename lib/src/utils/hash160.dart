@@ -3,9 +3,13 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 import 'package:hash/hash.dart';
 
-String hash160(List<int> input) {
+Uint8List hash160IntoBytes(List<int> input) {
   final im1 = sha256.convert(input).bytes;
-  final bytes = ripemd160(im1);
+  return ripemd160(im1);
+}
+
+String hash160(List<int> input) {
+  final bytes = hash160IntoBytes(input);
   return bytes.map((e) => e.toRadixString(16).padLeft(2, '0')).join();
 }
 
