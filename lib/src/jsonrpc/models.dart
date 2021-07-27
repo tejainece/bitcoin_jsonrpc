@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class JRPCRequest {
   final String jsonrpc;
   final String id;
@@ -78,4 +80,16 @@ class JRPCError {
 
   static JRPCError fromMap(Map<String, dynamic> map) =>
       JRPCError(map['code'], map['message'], data: map['data']);
+}
+
+class BasicAuth {
+  final String username;
+  final String password;
+  BasicAuth({required this.username, required this.password});
+  String encode() {
+    return base64Encode(utf8.encode('$username:$password'));
+  }
+
+  @override
+  String toString() => encode();
 }

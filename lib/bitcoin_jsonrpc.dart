@@ -1,7 +1,5 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
 library bitcoin_jsonrpc;
 
 export 'src/bitcoin_rpc/bitcoin_rpc.dart';
+export 'src/jsonrpc/models.dart' show BasicAuth;
 export 'src/utils/hash160.dart';
