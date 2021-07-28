@@ -31,7 +31,8 @@ class PublicKey {
   String toAddress({bool? compressed, int prefix = 0x00}) {
     final hash = hashIntoBytes(compressed: compressed).toList();
     hash.insert(0, prefix);
-    final checksum = sha256.convert(sha256.convert(hash).bytes).bytes.sublist(0, 4);
+    final checksum =
+        sha256.convert(sha256.convert(hash).bytes).bytes.sublist(0, 4);
     hash.addAll(checksum);
     return base58.encode(Uint8List.fromList(hash));
   }
@@ -45,4 +46,11 @@ class PublicKey {
     final encoded = encodeIntoBytes(compressed: compressed ?? this.compressed);
     return hash160(encoded);
   }
+}
+
+class AddressPrefix {
+  static const p2pkh = 0x00;
+  static const p2sh = 0x05;
+  static const p2pkhTestnet = 0x6F;
+  static const p2shTestnet = 0xC4;
 }
