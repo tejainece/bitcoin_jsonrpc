@@ -83,7 +83,7 @@ class Block {
       medianTime: toDateTime(map['mediantime'])!,
       nonce: map['nonce'],
       bits: map['bits'],
-      difficulty: map['difficulty'],
+      difficulty: (map['difficulty'] as num).toDouble(),
       chainwork: map['chainwork'],
       numTransactions: map['nTx'],
       previousBlockHash: map['previousblockhash'],
@@ -188,7 +188,7 @@ class Vout {
 
   static Vout fromMap(Map map) {
     return Vout(
-      value: map['value'],
+      value: (map['value'] as num).toDouble(),
       voutIndex: map['n'],
       scriptPubKey: ScriptPubKey.fromMap(map['scriptPubKey']),
     );

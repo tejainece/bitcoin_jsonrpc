@@ -85,3 +85,5 @@ class BitcoinRPC {
     return Block.fromMap(resp.result as Map);
   }
 }
+
+final oneSatsInBitcoin = BigInt.parse('100000000');
