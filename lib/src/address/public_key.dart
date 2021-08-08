@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
+import 'package:bech32/bech32.dart';
 import 'package:bitcoin_jsonrpc/bitcoin_jsonrpc.dart';
 import 'package:crypto/crypto.dart';
 import 'package:ninja_bip32/ninja_bip32.dart' as bip32;
 import 'package:bs58check/bs58check.dart';
+import 'package:ninja_basex/ninja_basex.dart';
 
 class PublicKey {
   final BigInt x;
@@ -46,15 +48,32 @@ class PublicKey {
     final encoded = encodeIntoBytes(compressed: compressed ?? this.compressed);
     return hash160(encoded);
   }
+
+  String toBitcoinBech32({bool testnet = false}) {
+    final hash = bitcoinHashBytes(compressed: true);
+    final base32 = toBaseBytes(hash, 32)..insert(0, 0);
+    String hrp = testnet ? 'tb' : 'bc';
+    return Bech32Encoder().convert(Bech32(hrp, base32));
+  }
+
+  String toLitecoinBech32({bool testnet = false}) {
+    final hash = bitcoinHashBytes(compressed: true);
+    final base32 = toBaseBytes(hash, 32)..insert(0, 0);
+    String hrp = testnet ? 'tltc' : 'ltc';
+    return Bech32Encoder().convert(Bech32(hrp, base32));
+  }
 }
 
 class AddressPrefix {
   /// Leading 1
   static const p2pkh = 0x00;
+
   /// Leading 3
   static const p2sh = 0x05;
+
   /// Leading m or n
   static const p2pkhTestnet = 0x6F;
+
   /// Leading 2
   static const p2shTestnet = 0xC4;
 }
