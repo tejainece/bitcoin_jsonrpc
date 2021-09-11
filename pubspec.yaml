@@ -12,12 +12,12 @@ dependencies:
   crypto:
   hash:
     git: https://github.com/redDwarf03/hash
-  ninja: ^3.0.2
+  ninja: ^3.0.7
   ninja_bip32:
     path: ../ninja_bip32
   bs58check: ^1.0.2
   bech32: ^0.2.1
-  ninja_basex: ^1.0.1
+  ninja_basex: ^1.0.2
 
 dev_dependencies:
-  test: ^1.17.10
+  test: ^1.17.12
